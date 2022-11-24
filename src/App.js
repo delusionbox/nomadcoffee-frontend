@@ -2,7 +2,9 @@ import { ApolloProvider, useReactiveVar } from "@apollo/client";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import Addshop from "./screens/Addshop";
 import { client, darkModeVar, isLoggedInVar } from "./screens/apollo";
+import Editshop from "./screens/Editshop";
 import Home from "./screens/Home";
 import Login from "./screens/Login";
 import NotFound from "./screens/NotFound";
@@ -30,10 +32,16 @@ function App() {
                 }
               </Route>
               {!isLoggedIn ? (
-                <Route path={routes.SignUp}>
+                <Route path={routes.signUp}>
                   <SignUp />
                 </Route>
               ) : null}
+              <Route path={routes.addshop}>
+                {isLoggedIn ? (<Addshop />) : (<Login />)}
+              </Route>
+              <Route path={routes.editshop}>
+                {isLoggedIn ? (<Editshop />) : (<Login />)}
+              </Route>
               <Route>
                 <NotFound />
               </Route>
